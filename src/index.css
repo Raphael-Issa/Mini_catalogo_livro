@@ -1,0 +1,28 @@
+/* src/index.css */
+
+/* O seletor * seleciona TODOS os elementos HTML */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Garante que imagens não passem da largura do container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove sublinhado padrão dos links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Define configurações base no body */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  background-color: #121212; /* Opcional: cor de fundo dark */
+  color: #ffffff;            /* Opcional: cor do texto */
+}
