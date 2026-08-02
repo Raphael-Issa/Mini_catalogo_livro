@@ -10,7 +10,7 @@ return (
     <div className="home-container">
       {/* 1. Navbar única do topo */}
       <Navbar 
-        tituloSite="Isekai Hub"
+        tituloSite="Vortex Mangás"
         home="Home"
         cat="Catálogos"
         sobre="Saiba Mais"
