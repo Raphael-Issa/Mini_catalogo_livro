@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Navbar } from '../componentes/Navbar';
-import { usePopularMangas } from '../hooks/usePopularMangas';
+// 1. Alterado para importar o hook de destaque!
+import { useMangaDestaque } from '../hooks/useMangaDestaque'; 
 import '../App.css';
 
 export function Home() {
-  // Chamada limpa do Custom Hook!
-  const { mangaDestaque, titulo, urlDaFoto, loading } = usePopularMangas();
+  // 2. Chamada atualizada para usar o useMangaDestaque
+  const { mangaDestaque, titulo, urlDaFoto, loading } = useMangaDestaque();
 
-  if (loading) return <h2>Carregando mangá...</h2>;
+  if (loading) return <h2 className='carregando'>Carregando mangá...</h2>;
   if (!mangaDestaque) return <p>Nenhum mangá encontrado.</p>;
 
   return (

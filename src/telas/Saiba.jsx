@@ -1,4 +1,4 @@
-import { Navbar } from '../componentes/Navbar';
+import { Navbar } from '../componentes/Navbar'; 
 import '../App.css';
 import { Descricao } from '../componentes/Descricao';
 

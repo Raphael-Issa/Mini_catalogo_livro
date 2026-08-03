@@ -4,7 +4,7 @@
   export async function getPopularMangas() {
     try {
       const response = await fetch(
-        `${BASE_URL}/manga?limit=20&includes[]=cover_art&order[followedCount]=desc`
+        `${BASE_URL}/manga?limit=100&includes[]=cover_art&order[followedCount]=desc`
       );
 
       if (!response.ok) {

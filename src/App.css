@@ -1,209 +1,947 @@
 /* ===================================
+
    1. ESTRUTURA GLOBAL E BASE
+
    =================================== */
+
 .home-container {
+
   background-color: #0b0c10; /* Cor de fundo escura (quase preta) da página */
+
   color: #ffffff;           /* Cor padrão dos textos (branca) */
+
   min-height: 100vh;        /* Força o container a ter no mínimo a altura inteira da tela */
+
   display: flex;             /* Ativa o Flexbox para organizar o layout */
+
   flex-direction: column;   /* Empilha os elementos em coluna (Header -> Main -> Footer) */
+
 }
+
+
 
 .loading-text {
+
   text-align: center;       /* Centraliza o texto de carregamento */
+
   margin-top: 5rem;         /* Empurra o texto para baixo, dando espaço do topo */
+
   color: #66fcf1;           /* Cor azul ciano brilhante */
+
 }
 
+
+
 /* ===================================
+
    2. NAVBAR (Menu Superior)
+
    =================================== */
+
 header {
+
   display: flex;                  /* Alinha título e nav lado a lado */
+
   align-items: center;            /* Alinha os itens verticalmente ao centro */
+
   justify-content: space-between; /* Empurra o conteúdo pras extremidades */
+
   padding: 1.2rem 8%;             /* Espaçamento interno: 1.2rem acima/abaixo, 8% nas laterais */
+
   background-color: #0b0c10;      /* Fundo escuro */
+
   border-bottom: 1px solid rgba(102, 252, 241, 0.2); /* Linha fina ciano translúcida no rodapé do header */
+
   z-index: 10;                    /* Mantém o header acima das imagens de fundo */
+
 }
+
+
 
 header h1 {
+
   font-size: 1.8rem;               /* Tamanho da fonte do título */
+
   font-weight: 800;                /* Deixa a fonte bem em negrito */
+
   color: #66fcf1;                  /* Cor ciano */
+
   text-transform: uppercase;       /* Força todas as letras a ficarem MAIÚSCULAS */
+
   letter-spacing: 2px;             /* Aumenta o espaço entre cada letra */
+
   text-shadow: 0 0 10px rgba(102, 252, 241, 0.3); /* Efeito de brilho neon suave */
+
   white-space: nowrap;             /* Impede que o título quebre em duas linhas se a tela diminuir */
+
 }
+
+
 
 /* Container dos links dentro do header */
+
 header nav {
+
   display: flex;         /* Coloca os links lado a lado */
+
   gap: 2rem;             /* Cria um espaço de 2rem entre cada link */
+
   margin-left: auto;     /* Usado junto com o de baixo para centralizar o menu */
+
   margin-right: auto;    /* mantendo o equilíbrio em telas médias */
+
 }
+
+
 
 header a {
-  color: #c5c6c7;             /* Cor cinza claro para os links */
-  text-decoration: none;     /* Remove o sublinhado padrão dos links */
-  font-weight: 600;          /* Deixa a fonte levemente em negrito */
-  text-transform: uppercase; /* Deixa em maiúsculas */
-  letter-spacing: 1px;       /* Espaçamento entre letras */
-  transition: all 0.3s ease; /* Transição suave de 0.3s para os efeitos de hover */
-  white-space: nowrap;       /* Evita que o texto do link quebre linha */
+
+  color: #c5c6c7;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  white-space: nowrap;
+
+  position: relative;
+
+  padding-bottom: 4px;
+
+  transition: color 0.3s ease;
+
 }
+
+
+
+/* Cria a estrutura da sub-line */
+
+header a::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 0%;                /* O padrão dos outros links fica apagado */
+
+  height: 2px;
+
+  background-color: #66fcf1;
+
+  box-shadow: 0 0 8px #66fcf1;
+
+  transition: width 0.3s ease;
+
+}
+
+
+
+/* Efeito ao passar o mouse */
 
 header a:hover {
-  color: #66fcf1;            /* Muda para ciano ao passar o mouse */
-  text-shadow: 0 0 8px #66fcf1; /* Adiciona o brilho neon no link no hover */
+
+  color: #66fcf1;
+
+  text-shadow: 0 0 8px #66fcf1;
+
 }
 
-/* ===================================
-   3. BANNER HERO (Destaque Principal)
-   =================================== */
-.hero-banner {
-  position: relative;        /* Define referência para os filhos com position: absolute */
-  width: 100%;               /* Ocupa toda a largura */
-  height: 80vh;              /* Ocupa 80% da altura da tela */
-  display: flex;             /* Flexbox para alinhar o conteúdo interno */
-  align-items: center;       /* Centraliza o conteúdo (textos e botões) verticalmente */
-  padding: 0 8%;             /* Alinha as margens laterais com a navbar */
-  overflow: hidden;          /* Corta qualquer coisa que passar dos limites do banner */
+
+
+header a:hover::after {
+
+  width: 100%;
+
 }
+
+
+
+/* --- ADICIONADO PARA O LINK CLICADO/ATIVO --- */
+
+/* Mantém o texto aceso na rota atual */
+
+header a.active {
+
+  color: #66fcf1;
+
+  text-shadow: 0 0 8px #66fcf1;
+
+}
+
+
+
+/* Mantém a linha azul acesa (width 100%) na rota atual */
+
+header a.active::after {
+
+  width: 100%;
+
+}
+
+/* Faz a linha aparecer ao passar o mouse */
+
+header a:hover::after {
+
+  width: 100%;
+
+}
+
+
+
+/* ===================================
+
+   3. BANNER HERO (Destaque Principal)
+
+   =================================== */
+
+.hero-banner {
+
+  position: relative;        /* Define referência para os filhos com position: absolute */
+
+  width: 100%;               /* Ocupa toda a largura */
+
+  height: 80vh;              /* Ocupa 80% da altura da tela */
+
+  display: flex;             /* Flexbox para alinhar o conteúdo interno */
+
+  align-items: center;       /* Centraliza o conteúdo (textos e botões) verticalmente */
+
+  padding: 0 8%;             /* Alinha as margens laterais com a navbar */
+
+  overflow: hidden;          /* Corta qualquer coisa que passar dos limites do banner */
+
+}
+
+
 
 /* Estilo compartilhado para os fundos absolutos */
+
 .hero-background,
+
 .hero-overlay {
+
   position: absolute; /* Faz as camadas flutuarem cobrindo o hero-banner todo */
+
   top: 0;
+
   left: 0;
+
   width: 100%;
+
   height: 100%;
+
 }
+
+
 
 .hero-background {
+
   background-size: cover;          /* Faz a imagem preencher todo o espaço sem distorcer */
+
   background-position: center 20%; /* Foca a imagem no centro, levemente para o topo (20%) */
+
   opacity: 0.35;                   /* Deixa a imagem semi-transparente para o texto se destacar */
+
   z-index: 1;                      /* Fica na camada mais baixa do fundo */
+
 }
+
+
 
 .hero-overlay {
+
   /* Criamos um degradê escuro da esquerda para a direita para dar leitura ao texto */
+
   background: linear-gradient(90deg, #0b0c10 20%, rgba(11, 12, 16, 0.6) 60%, rgba(11, 12, 16, 0.2) 100%);
+
   z-index: 2; /* Fica por cima da foto e abaixo do texto */
+
 }
+
+
 
 .hero-content {
+
   position: relative; /* Garante que respeite o z-index */
+
   z-index: 3;          /* Fica no topo de todas as camadas do banner */
+
   max-width: 600px;    /* Limita a largura do bloco para o texto não espalhar muito */
+
 }
+
+
 
 .badge {
+
   color: #66fcf1;            /* Cor ciano */
+
   text-transform: uppercase; /* Maiúsculas */
+
   font-size: 0.9rem;         /* Fonte pequena */
+
   font-weight: 700;          /* Negrito */
+
   letter-spacing: 2px;       /* Espaço entre letras amplo */
+
 }
+
+
 
 .hero-title {
+
   font-size: 3rem;           /* Título grande e impactante */
+
   font-weight: 800;          /* Bem grosso/negrito */
+
   margin: 0.5rem 0 1rem;     /* Espaçamento acima e abaixo do título */
+
   line-height: 1.1;          /* Junta mais as linhas para títulos compridos */
+
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7); /* Sombra preta para destacar da foto de fundo */
+
 }
+
+
 
 .hero-description {
+
   font-size: 1.1rem;      /* Tamanho da descrição */
+
   color: #c5c6c7;         /* Cor cinza claro */
+
   margin-bottom: 2rem;    /* Espaço abaixo antes dos botões */
+
   line-height: 1.5;       /* Altura da linha confortável para leitura */
+
 }
 
+
+
 /* ===================================
+
    4. BOTÕES E RODAPÉ
+
    =================================== */
+
 .hero-buttons {
-  display: flex; /* Coloca os dois botões lado a lado */
-  gap: 1.2rem;   /* Espaço entre eles */
+
+  display: flex;
+
+  gap: 1.2rem;
+
 }
+
+
 
 .btn {
-  padding: 0.9rem 2rem;      /* Tamanho do botão (espaçamento interno) */
-  font-size: 1rem;           /* Tamanho do texto */
-  font-weight: 700;          /* Negrito */
-  border-radius: 6px;        /* Bordas levemente arredondadas */
-  cursor: pointer;           /* Mostra a mãozinha de clique */
-  transition: all 0.3s ease; /* Animação suave para as transformações */
+
+  padding: 0.9rem 2rem;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  position: relative;     /* Necessário para posicionar a linha */
+
+  overflow: hidden;        /* Garante que a linha não vaze das bordas arredondadas */
+
 }
 
-/* Botão Principal (Preenchido) */
+
+
+/* --- BOTÃO PRINCIPAL (Preenchido com azul) --- */
+
 .btn-primary {
-  background-color: #66fcf1;                  /* Fundo ciano */
-  color: #0b0c10;                             /* Texto escuro */
-  border: none;                               /* Sem borda */
-  box-shadow: 0 0 15px rgba(102, 252, 241, 0.4); /* Brilho neon ciano em volta */
+
+  background-color: #66fcf1;
+
+  color: #0b0c10;
+
+  border: none;
+
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+
 }
+
+
 
 .btn-primary:hover {
-  background-color: #45a29e;  /* Escurece um pouco o ciano no hover */
-  transform: translateY(-2px); /* Efeito visual de "subir" o botão ao passar o mouse */
+
+  background-color: #45a29e;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 0 25px rgba(102, 252, 241, 0.7); /* Aumenta o brilho azul no hover */
+
 }
 
-/* Botão Secundário (Apenas Borda) */
+
+
+/* --- BOTÃO SECUNDÁRIO (Com linha azul animada embaixo) --- */
+
 .btn-secondary {
-  background-color: transparent; /* Fundo transparente */
-  color: #ffffff;                 /* Texto branco */
-  border: 2px solid #ffffff;      /* Borda branca */
+
+  background-color: transparent;
+
+  color: #ffffff;
+
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
 }
+
+
+
+/* Linha azul na parte inferior do botão secundário */
+
+.btn-secondary::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 0;
+
+  width: 0%;                /* Inicia escondida */
+
+  height: 3px;              /* Espessura da linha azul */
+
+  background-color: #66fcf1;/* Cor ciano */
+
+  box-shadow: 0 0 10px #66fcf1;
+
+  transition: width 0.3s ease;
+
+}
+
+
 
 .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Cria um fundo branco translúcido */
-  transform: translateY(-2px);                 /* Sobem ligeiramente */
+
+  border-color: #66fcf1;     /* A borda muda para azul */
+
+  color: #66fcf1;            /* O texto muda para azul */
+
+  background-color: rgba(102, 252, 241, 0.05);
+
+  transform: translateY(-2px);
+
 }
+
+
+
+/* Faz a linha azul preencher a base do botão ao passar o mouse */
+
+.btn-secondary:hover::after {
+
+  width: 100%;
+
+}
+
+
 
 .footer {
+
   text-align: center;         /* Centraliza o texto do rodapé */
+
   padding: 1.5rem;            /* Espaçamento interno */
+
   background-color: #1f2833;  /* Cor de fundo cinza escuro para diferenciar do corpo */
+
   color: #c5c6c7;             /* Texto cinza claro */
+
   font-size: 0.9rem;          /* Fonte pequena */
+
   margin-top: auto;           /* Mágica do Flexbox: empurra o footer sempre para o fim da tela */
+
+}
+
+
+
+/* ===================================
+
+   5. ADAPTAÇÃO PARA CELULARES
+
+   =================================== */
+
+@media (max-width: 600px) {
+
+  /* Se a tela for menor que 600px de largura... */
+
+  header {
+
+    flex-direction: column; /* Empilha a logo e os links em coluna */
+
+    gap: 1rem;              /* Espaço vertical entre eles */
+
+    padding: 1rem 4%;       /* Diminui o padding para economizar espaço em telas pequenas */
+
+  }
+
+
+
+  header nav {
+
+    margin: 0;   /* Reseta as margens automáticas para alinhar certo no mobile */
+
+    gap: 1rem;  /* Diminui a distância entre os links no celular */
+
+  }
+
+}
+
+
+
+/* ===================================
+
+   6. DESCRIÇÃO DA TELA "SAIBA"
+
+   =================================== */
+
+
+
+.descricao{
+
+  margin-top: 15px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center; /* Centraliza na horizontal */
+
+  align-items: center;     /* Centraliza na vertical */
+
+  /* Opcional: garante que o texto fique centralizado se tiver múltiplas linhas */
+
+  text-align: center;
+
+}
+
+
+
+/* ===================================
+
+   7. PAINEL E GRID DO CATÁLOGO (.centro)
+
+   =================================== */
+
+
+
+/* Container central */
+
+.centro {
+
+  padding: 3rem 8%;
+
+}
+
+
+
+/* Grid de cards fluida e responsiva */
+
+.manga-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+
+  gap: 2rem;
+
+  max-width: 1200px;
+
+  margin: 1rem auto 0; /* O 'auto' nas laterais substitui a necessidade do flex no pai */
+
+}
+
+
+
+/* Estilo do Card */
+
+.manga-card {
+
+  background-color: #1f2833;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(102, 252, 241, 0.1);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  cursor: pointer;
+
+}
+
+
+
+.manga-card:hover {
+
+  transform: translateY(-6px);
+
+  border-color: #66fcf1;
+
+  box-shadow: 0 8px 20px rgba(102, 252, 241, 0.25);
+
+}
+
+
+
+/* Capa */
+
+.manga-card-img {
+
+  width: 100%;
+
+  height: 260px;
+
+  object-fit: cover;
+
+  border-bottom: 2px solid #45a29e;
+
+}
+
+
+
+/* Título */
+
+.manga-card-title {
+
+  padding: 0.8rem 0.6rem;
+
+  font-size: 0.95rem;          /* Fonte um pouco maior e legível */
+
+  font-weight: 700;
+
+  color: #ffffff;
+
+  text-align: center;
+
+  line-height: 1.3;            /* Espaço confortável entre as linhas */
+
+ 
+
+  /* Permite até 3 linhas completas */
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 5;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+ 
+
+  /* Altura proporcional para 3 linhas sem cortar nada (1.3 x 3 = 3.9em) */
+
+  min-height: 3.9em;
+
+}
+
+
+
+
+
+
+
+
+
+/* Celular (apenas o essencial) */
+
+@media (max-width: 600px) {
+
+  .centro {
+
+    padding: 2rem 4%;
+
+  }
+
+
+
+  .manga-grid {
+
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+
+    gap: 1rem;
+
+  }
+
+
+
+  .manga-card-img {
+
+    height: 190px;
+
+  }
+
+}
+
+
+
+/* Container da barra de pesquisa */
+
+.search-container {
+
+  width: 100%;
+
+  max-width: 500px;
+
+  margin-bottom: 2rem;
+
+  margin: 0 auto 2rem auto;
+
+}
+
+
+
+/* Campo de digitação */
+
+.search-input {
+
+  width: 100%;
+
+  padding: 0.8rem 1.2rem;
+
+  font-size: 1rem;
+
+  background-color: #1f2833;
+
+  color: #ffffff;
+
+  border: 1px solid rgba(102, 252, 241, 0.3);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  transition: all 0.3s ease;
+
+ 
+
+}
+
+
+
+/* Efeito Neon quando o usuário clica para digitar */
+
+.search-input:focus {
+
+  border-color: #66fcf1;
+
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+
+}
+
+
+
+/* Texto quando não encontra nada */
+
+.no-results {
+
+  color: #c5c6c7;
+
+  font-size: 1.1rem;
+
+  grid-column: 1 / -1; /* Ocupa a largura inteira do grid */
+
+  text-align: center;
+
+  padding: 2rem 0;
+
+}
+
+
+
+.carregando{
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100vh;
+
+}
+
+
+
+.logo-img {
+
+  width: 60px;       /* Altere este valor para a largura desejada */
+
+  height: auto;       /* Mantém a proporção original da foto sem distorcer */
+
+  object-fit: contain; /* Garante que a imagem se ajuste perfeitamente */
+
+} 
+
+
+/* ===================================
+   8. TELA DE DETALHES DO MANGÁ
+   =================================== */
+
+.detalhes-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 8%;
+  flex: 1;
+}
+
+.btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  color: #66fcf1;
+  text-decoration: none;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.btn-voltar:hover {
+  transform: translateX(-5px);
+}
+
+.detalhes-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  background-color: #1f2833;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.detalhes-capa {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid #45a29e;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.detalhes-info h1 {
+  font-size: 2.2rem;
+  color: #66fcf1;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.detalhes-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: #c5c6c7;
+}
+
+.detalhes-meta span {
+  background-color: #0b0c10;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(102, 252, 241, 0.1);
+}
+
+.sinopse-box h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(102, 252, 241, 0.2);
+  padding-bottom: 0.4rem;
+}
+
+.sinopse-box p {
+  line-height: 1.6;
+  color: #c5c6c7;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .detalhes-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .detalhes-capa {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .detalhes-meta {
+    justify-content: center;
+  }
 }
 
 /* ===================================
-   5. ADAPTAÇÃO PARA CELULARES
-   =================================== */
-@media (max-width: 600px) {
-  /* Se a tela for menor que 600px de largura... */
-  header {
-    flex-direction: column; /* Empilha a logo e os links em coluna */
-    gap: 1rem;              /* Espaço vertical entre eles */
-    padding: 1rem 4%;       /* Diminui o padding para economizar espaço em telas pequenas */
-  }
-
-  header nav {
-    margin: 0;   /* Reseta as margens automáticas para alinhar certo no mobile */
-    gap: 1rem;  /* Diminui a distância entre os links no celular */
-  }
-} 
-
-/* ===================================
-   6. DESCRIÇÃO DA TELA "SAIBA"
+   9. PAGINAÇÃO 
    =================================== */
 
-.descricao{
-  margin-top: 15px;
+
+
+
+.paginacao {
   display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centraliza na horizontal */
-  align-items: center;     /* Centraliza na vertical */
-  /* Opcional: garante que o texto fique centralizado se tiver múltiplas linhas */
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.paginacao button {
+  background-color: #1f2833;
+  color: #66fcf1;
+  border: 1px solid #45a29e;
+  padding: 0.5rem 0.8rem;
+  min-width: 38px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.paginacao button:hover:not(:disabled) {
+  background-color: #66fcf1;
+  color: #0b0c10;
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+}
+
+/* Botão da página ativa no momento */
+.paginacao button.ativo {
+  background-color: #66fcf1;
+  color: #0b0c10;
+  border-color: #66fcf1;
+}
+
+.paginacao button:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  border-color: #c5c6c7;
+}
+
+.paginacao .reticencias {
+  color: #c5c6c7;
+  font-weight: bold;
+  padding: 0 0.2rem;
 }
