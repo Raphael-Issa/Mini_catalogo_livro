@@ -1,9 +1,9 @@
 // src/componentes/Navbar.jsx
 import { Link } from 'react-router-dom';
-export function Navbar({ tituloSite,info,home,cat,sobre}) {
+export function Navbar({info,home,cat,sobre}) {
   return (
     <header className="header">
-      <h1>{tituloSite}</h1>
+      <h1>VORTEX MANGÁS</h1>
       <p>{info}</p>
       <nav>
         {home && <Link to="/">{home}</Link>}

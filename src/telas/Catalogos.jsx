@@ -1,8 +1,8 @@
 import { Navbar } from '../componentes/Navbar';
 import '../App.css';
-import { Descricao } from '../componentes/Descricao';
 
-export function Saiba(){
+
+export function Catalogos(){
 
 
 return (
@@ -15,10 +15,12 @@ return (
         sobre="Saiba Mais"
       />
 
-      <Descricao 
-        titulo="Sobre o Projeto" 
-        info="Este é um texto explicativo passado via prop." 
-      />
+
+
+
+
+
+
 
       {/* 3. Rodapé simples */}
       <footer className="footer">
