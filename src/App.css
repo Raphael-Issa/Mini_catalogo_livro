@@ -54,23 +54,45 @@ header {
   background-color: var(--bg-dark);
   border-bottom: 1px solid rgba(102, 252, 241, 0.2);
   z-index: 10;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1; /* Ocupa o espaço da esquerda */
+}
+
+.logo-img {
+  width: 45px;
+  height: auto;
+  object-fit: contain;
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--accent-primary);
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: var(--shadow-neon);
   white-space: nowrap;
+  margin: 0;
 }
 
 header nav {
   display: flex;
+  justify-content: center; /* Centraliza os links dentro do nav */
   gap: 2rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
+  flex: 2; /* Dá mais espaço relativo para o nav ficar bem no centro da tela */
+}
+
+/* Criamos um espaço invisível na direita para equilibrar com a logo e centralizar perfeitamente */
+header::after {
+  content: '';
+  flex: 1;
 }
 
 header a {
@@ -463,6 +485,8 @@ header a.active::after {
 /* ===================================
    9. RESPONSIVIDADE (Media Queries)
    =================================== */
+
+/* Tablet e telas médias */
 @media (max-width: 768px) {
   .detalhes-content {
     grid-template-columns: 1fr;
@@ -479,16 +503,34 @@ header a.active::after {
   }
 }
 
+/* Celular e telas pequenas */
 @media (max-width: 600px) {
   header {
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
     padding: 1rem 4%;
   }
 
+  /* Mantém logo e título lado a lado no celular */
+  .logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .logo-img {
+    width: 38px;
+  }
+
   header nav {
     margin: 0;
-    gap: 1rem;
+    gap: 1.2rem;
   }
 
   .centro {
@@ -505,11 +547,31 @@ header a.active::after {
   }
 }
 
-
-
+/* ===================================
+   BOTÃO DE VOLTAR (Tema Neon/Cyber)
+   =================================== */
 .btn-voltar {
-  background: none;
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
   cursor: pointer;
-  /* ... mantenha suas regras atuais de font-size, color, etc ... */
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 5px rgba(102, 252, 241, 0.2);
+}
+
+.btn-voltar:hover {
+  background-color: var(--accent-primary);
+  color: var(--bg-dark, #0b0c10);
+  box-shadow: 0 0 15px var(--accent-primary);
+  transform: translateX(-4px); /* Dá um efeito sutil de recuo para a esquerda */
 }

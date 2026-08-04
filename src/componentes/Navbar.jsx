@@ -1,18 +1,19 @@
-// src/componentes/Navbar.jsx
-import { NavLink } from 'react-router-dom';
-import logo from '../assets/Vortex.png'; 
+import { Link } from 'react-router-dom';
 
-export function Navbar({ info, home, cat, sobre }) {
+export function Navbar({ home, cat, sobre }) {
   return (
-    <header className="header">
-      <img src={logo} alt="Logo do Projeto" className="logo-img"/>
-      <h1>VORTEX MANGÁS</h1>
-      
-      <p>{info}</p>
+    <header>
+      {/* Envolve a logo e o título juntos */}
+      <div className="logo-container">
+        <img src="/Vortex.png" alt="Logo Vortex" className="logo-img" />
+        <h1>VORTEX MANGÁS</h1>
+        <img src="/Vortex.png" alt="Logo Vortex" className="logo-img" />
+      </div>
+
       <nav>
-        {home && <NavLink to="/">{home}</NavLink>}
-        {cat && <NavLink to="/catalogos">{cat}</NavLink>}
-        {sobre && <NavLink to="/saiba">{sobre}</NavLink>}
+        <Link to="/">{home}</Link>
+        <Link to="/catalogos">{cat}</Link>
+        <Link to="/saiba">{sobre}</Link>
       </nav>
     </header>
   );
