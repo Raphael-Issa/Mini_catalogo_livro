@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getPopularMangas } from '../services/mangadex_api';
+import { getPopularMangas } from '../services/MangaDexApi';
 
 export function usePopularMangas() {
   const [mangas, setMangas] = useState([]);
