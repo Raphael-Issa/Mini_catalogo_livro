@@ -1,11 +1,12 @@
-const MAX_PAGINAS = 100;
+// Altere de 100 para 500
+const MAX_PAGINAS = 500; 
 
 export function Paginacao({ pagina, totalPagesAPI = 1, setPagina }) {
+  // Agora calcula o limite real até 500 páginas!
   const totalPages = Math.min(totalPagesAPI || 1, MAX_PAGINAS);
 
   if (totalPages <= 1) return null;
 
-  // Cálculo das páginas visíveis e reticências
   const maxVisiblePages = 5;
   let startPage = Math.max(1, pagina - 2);
   let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
