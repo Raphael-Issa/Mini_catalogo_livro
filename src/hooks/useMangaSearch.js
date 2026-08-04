@@ -13,8 +13,9 @@ export function useMangaSearch(query = '', page = 1) {
         setLoading(true);
         const offset = (page - 1) * LIMIT;
 
-        // Monta a URL incluindo limit, offset e o termo de busca se existir
-        let url = `https://api.mangadex.org/manga?limit=${LIMIT}&offset=${offset}&includes[]=cover_art`;
+        // Adicionamos order[relevance]=desc para pedir prioridade à API
+        let url = `https://api.mangadex.org/manga?limit=${LIMIT}&offset=${offset}&includes[]=cover_art&order[relevance]=desc`;
+        
         if (query) {
           url += `&title=${encodeURIComponent(query)}`;
         }
@@ -22,9 +23,39 @@ export function useMangaSearch(query = '', page = 1) {
         const response = await fetch(url);
         const data = await response.json();
 
-        setMangas(data.data || []);
-        
-        // A API retorna 'total' com a contagem total de resultados disponíveis
+        let results = data.data || [];
+
+        // Se houver uma busca ativa, aplicamos a lógica de priorização visual
+        if (query.trim()) {
+          const cleanQuery = query.trim().toLowerCase();
+
+          results = [...results].sort((a, b) => {
+            // Pega o título principal (geralmente em 'en' ou o primeiro disponível)
+            const titleA = (a.attributes?.title?.en || Object.values(a.attributes?.title || {})[0] || '').toLowerCase();
+            const titleB = (b.attributes?.title?.en || Object.values(b.attributes?.title || {})[0] || '').toLowerCase();
+
+            // Lógica de pontuação de relevância
+            const getScore = (title) => {
+              if (title === cleanQuery) return 3; // Correspondência exata
+              if (title.startsWith(cleanQuery)) return 2; // Começa com a palavra
+              return 1; // Contém a palavra em outro lugar
+            };
+
+            const scoreA = getScore(titleA);
+            const scoreB = getScore(titleB);
+
+            // Se as pontuações forem diferentes, ordena do maior para o menor
+            if (scoreA !== scoreB) {
+              return scoreB - scoreA;
+            }
+
+            // Se empatarem na pontuação, prioriza títulos mais curtos (mais próximos da busca original)
+            return titleA.length - titleB.length;
+          });
+        }
+
+        setMangas(results);
+
         const totalItems = data.total || 0;
         setTotalPages(Math.ceil(totalItems / LIMIT));
       } catch (err) {
