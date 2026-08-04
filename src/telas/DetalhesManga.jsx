@@ -1,9 +1,10 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // 1. Importe o useNavigate em vez do Link
 import { Navbar } from '../componentes/Navbar';
 import { useMangaDetails } from '../hooks/useMangaDetails';
 
 export function DetalhesManga() {
   const { id } = useParams();
+  const navigate = useNavigate(); // 2. Instancie o hook
   const { manga, titulo, descricao, urlCapa, loading, error } = useMangaDetails(id);
 
   if (loading) return <h2 className="carregando">Carregando detalhes...</h2>;
@@ -11,10 +12,11 @@ export function DetalhesManga() {
 
   return (
     <div className="home-container">
-      <Navbar home="Home" cat="Catálogos" sobre="Saiba Mais" />
-
       <main className="detalhes-container">
-        <Link to="/catalogos" className="btn-voltar">← Voltar ao Catálogo</Link>
+        {/* 3. Troque o Link por um botão com navigate(-1) */}
+        <button onClick={() => navigate(-1)} className="btn-voltar">
+          ← Voltar ao Catálogo
+        </button>
         
         <div className="detalhes-content">
           <img src={urlCapa} alt={titulo} className="detalhes-capa" />

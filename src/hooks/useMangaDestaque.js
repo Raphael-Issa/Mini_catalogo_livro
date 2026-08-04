@@ -1,19 +1,10 @@
-import { useState, useEffect } from 'react';
 import { usePopularMangas } from './usePopularMangas';
 
 export function useMangaDestaque() {
   const { mangas, loading } = usePopularMangas();
-  const [indiceSorteado, setIndiceSorteado] = useState(0);
 
-  useEffect(() => {
-    if (mangas && mangas.length > 0) {
-      const totalMangas = Math.min(mangas.length, 100);
-      const numeroAleatorio = Math.floor(Math.random() * totalMangas);
-      setIndiceSorteado(numeroAleatorio);
-    }
-  }, [mangas]);
-
-  const mangaDestaque = mangas[indiceSorteado];
+  // Pega sempre o primeiro mangá da lista (índice 0)
+  const mangaDestaque = mangas?.[0] || null;
 
   // Tratamento do Título
   const titulos = mangaDestaque?.attributes?.title || {};
@@ -32,7 +23,7 @@ export function useMangaDestaque() {
 
   const nomeArquivo = caparel?.attributes?.fileName;
 
-  const urlDaFoto = nomeArquivo 
+  const urlDaFoto = (mangaDestaque && nomeArquivo)
     ? `https://uploads.mangadex.org/covers/${mangaDestaque.id}/${nomeArquivo}`
     : "https://via.placeholder.com/1200x600?text=Sem+Capa";
 
