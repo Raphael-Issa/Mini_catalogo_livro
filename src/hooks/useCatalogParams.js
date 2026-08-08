@@ -1,3 +1,18 @@
+/**
+ * HOOK: useCatalogParams
+ * * RESPONSABILIDADE:
+ * Sincronizar o estado da busca e da paginação do catálogo diretamente com a URL.
+ * * FUNCIONALIDADES:
+ * 1. Leitura: Extrai os parâmetros 'busca' e 'pagina' atuais da barra de endereço.
+ * 2. Atualização de Página: Altera a página na URL mantendo os limites (min: 1, max: totalPages).
+ * 3. Busca em Tempo Real: Atualiza o termo de busca na URL e reseta a paginação para a página 1.
+ * 4. UX: Rola a tela suavemente para o topo (scrollTop) sempre que a página muda.
+ * * VANTAGEM:
+ * Permite compartilhar links diretos da pesquisa/página e mantém o histórico
+ * funcional ao usar os botões "Voltar" e "Avançar" do navegador.
+ */
+
+
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 

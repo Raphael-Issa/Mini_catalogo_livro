@@ -1,3 +1,16 @@
+/**
+ * HOOK: useMangaDestaque
+ * * RESPONSABILIDADE:
+ * Processar e formatar as informações do mangá de maior destaque (Hero Banner da Home).
+ * * FUNCIONALIDADES:
+ * 1. Reuso: Consome o hook `usePopularMangas` para obter a lista de mangás mais seguidos.
+ * 2. Seleção: Define o primeiro item da lista (índice 0) como o mangá em destaque.
+ * 3. Tratamento de Título: Aplica fallback por idioma (Inglês > Inglês Alternativo > Romanizado > Português > Qualquer outro).
+ * 4. Tratamento de Capa: Constrói a URL completa da imagem procurando pelo relacionamento 'cover_art' no objeto da API.
+ * * RETORNO:
+ * Objeto com o mangá em destaque, título tratado, URL da capa formatada, a lista completa e o estado de carregamento.
+ */
+
 import { usePopularMangas } from './usePopularMangas';
 
 export function useMangaDestaque() {

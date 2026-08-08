@@ -125,7 +125,7 @@ function sortMangasByRelevance(results, query) {
 }
 
 
-// --- Função Exportada da API ---
+// Atualização da sua searchMangas
 export async function searchMangas(query = '', page = 1) {
   const offset = (page - 1) * LIMIT;
   let url = `${BASE_URL}/manga?limit=${LIMIT}&offset=${offset}&includes[]=cover_art&order[relevance]=desc`;
@@ -135,21 +135,30 @@ export async function searchMangas(query = '', page = 1) {
   }
 
   const response = await fetch(url);
-  
-  if (!response.ok) {
-    throw new Error('Erro ao buscar lista de mangás');
-  }
+  if (!response.ok) throw new Error('Erro ao buscar lista de mangás');
 
   const data = await response.json();
   const rawResults = data.data || [];
-
-  // Aplica a lógica de ordenação se houver busca
   const sortedResults = sortMangasByRelevance(rawResults, query);
-  const totalItems = data.total || 0;
+
+  // --- NOVO: Puxa as notas de todos os mangás retornados de uma só vez ---
+  const mangaIds = sortedResults.map(manga => manga.id);
+  const statistics = await getMangasRatings(mangaIds);
+
+  // Anexa a nota calculada dentro de cada objeto 'manga'
+  const mangasComNotas = sortedResults.map(manga => {
+    const ratingObj = statistics[manga.id]?.rating;
+    const average = ratingObj?.average;
+    
+    return {
+      ...manga,
+      nota: average ? average.toFixed(1) : 'N/A'
+    };
+  });
 
   return {
-    mangas: sortedResults,
-    totalPages: Math.ceil(totalItems / LIMIT)
+    mangas: mangasComNotas,
+    totalPages: Math.ceil((data.total || 0) / LIMIT)
   };
 }
 
@@ -167,3 +176,38 @@ export async function searchMangas(query = '', page = 1) {
 // O que faz a sortMangasByRelevance(results, query): Quando o usuário pesquisa por "Naruto", a API do MangaDex pode devolver coisas como "Naruto Gaiden" ou 
 // spin-offs antes do "Naruto" principal. Essa função lê os títulos retornados, aplica uma pontuação (score) para dar 
 // prioridade ao nome exato e reordena a lista.
+
+
+
+
+// Função auxiliar para buscar notas em lote de uma lista de IDs
+async function getMangasRatings(mangaIds) {
+  if (!mangaIds || mangaIds.length === 0) return {};
+
+  try {
+    // Monta a URL: /statistics/manga?manga[]=id1&manga[]=id2...
+    const queryParams = mangaIds.map(id => `manga[]=${id}`).join('&');
+    const response = await fetch(`${BASE_URL}/statistics/manga?${queryParams}`);
+    
+    if (!response.ok) return {};
+
+    const data = await response.json();
+    return data.statistics || {};
+  } catch (error) {
+    console.error("Erro ao buscar notas em lote:", error);
+    return {};
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

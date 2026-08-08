@@ -1,3 +1,15 @@
+/**
+ * HOOK: useMangaSearch
+ * * RESPONSABILIDADE:
+ * Gerenciar a busca paginada, o estado de carregamento e a lista de mangás do catálogo.
+ * * FUNCIONALIDADES:
+ * 1. Reatividade (useEffect): Monitora alterações em 'query' (termo de busca) e 'page' (página atual) para refazer a requisição.
+ * 2. Integração: Consome a função `searchMangas` da camada de serviços (MangaDexApi).
+ * 3. Gerenciamento de Estado: Atualiza a lista de mangás retornados, o total de páginas calculadas e o estado de 'loading'.
+ * * RETORNO:
+ * Objeto contendo o array 'mangas' (já com as notas e capas tratadas), o número de 'totalPages' e a flag 'loading'.
+ */
+
 import { useState, useEffect } from 'react';
 import { searchMangas } from '../services/MangaDexApi'; // Importa a função do service
 

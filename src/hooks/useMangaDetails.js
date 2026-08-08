@@ -1,5 +1,15 @@
 // src/hooks/useMangaDetails.js
-
+/**
+ * HOOK: useMangaDetails
+ * * RESPONSABILIDADE:
+ * Gerenciar a busca, estado e erros das informações detalhadas de um único mangá por ID.
+ * * FUNCIONALIDADES:
+ * 1. Ciclo de Vida (useEffect): Reage a alterações no 'id' da URL e dispara a requisição.
+ * 2. Integração: Consome a função `getMangaDetailsById` da camada de serviços (MangaDexApi).
+ * 3. Gerenciamento de Estado: Controla 'loading' (carregamento) e 'error' para feedback visual na tela.
+ * * RETORNO:
+ * Objeto contendo os dados mastigados (manga, titulo, descricao, urlCapa, nota) juntamente com as flags 'loading' e 'error'.
+ */
 import { useState, useEffect } from 'react';
 import { getMangaDetailsById } from '../services/MangaDexApi'; // Importa a função do service
 
