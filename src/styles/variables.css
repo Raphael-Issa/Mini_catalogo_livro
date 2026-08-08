@@ -1,0 +1,12 @@
+/* 1. VARIÁVEIS DE TEMA (Design Tokens) */
+:root {
+  --bg-dark: #0b0c10;
+  --bg-card: #1f2833;
+  --accent-primary: #66fcf1;
+  --accent-secondary: #45a29e;
+  --text-primary: #ffffff;
+  --text-muted: #c5c6c7;
+  
+  --shadow-neon: 0 0 10px rgba(102, 252, 241, 0.3);
+  --shadow-neon-strong: 0 0 25px rgba(102, 252, 241, 0.7);
+}

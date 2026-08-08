@@ -1,0 +1,83 @@
+/* 3. NAVBAR / HEADER */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 8%;
+  background-color: var(--bg-dark);
+  border-bottom: 1px solid rgba(102, 252, 241, 0.2);
+  z-index: 10;
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.logo-img {
+  width: 45px;
+  height: auto;
+  object-fit: contain;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: var(--shadow-neon);
+  white-space: nowrap;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0;
+  flex: 2;
+}
+
+header::after {
+  content: '';
+  flex: 1;
+}
+
+header a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
+
+header a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+  transition: width 0.3s ease;
+}
+
+header a:hover,
+header a.active {
+  color: var(--accent-primary);
+  text-shadow: 0 0 8px var(--accent-primary);
+}
+
+header a:hover::after,
+header a.active::after {
+  width: 100%;
+}

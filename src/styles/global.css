@@ -1,0 +1,27 @@
+/* 2. ESTRUTURA GLOBAL E BASE */
+.home-container {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.carregando {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-text {
+  text-align: center;
+  margin-top: 5rem;
+  color: var(--accent-primary);
+}
+
+.logo-img {
+  width: 60px;
+  height: auto;
+  object-fit: contain;
+}

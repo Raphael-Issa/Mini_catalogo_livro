@@ -1,0 +1,62 @@
+/* 7. TELA DE DETALHES DO MANGÁ */
+.detalhes-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 8%;
+  flex: 1;
+}
+
+.detalhes-content {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  background-color: var(--bg-card);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.detalhes-capa {
+  width: 100%;
+  border-radius: 8px;
+  border: 2px solid var(--accent-secondary);
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.detalhes-info h1 {
+  font-size: 2.2rem;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.detalhes-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.detalhes-meta span {
+  background-color: var(--bg-dark);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(102, 252, 241, 0.1);
+}
+
+.sinopse-box h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(102, 252, 241, 0.2);
+  padding-bottom: 0.4rem;
+}
+
+.sinopse-box p {
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
